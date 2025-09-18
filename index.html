@@ -1,81 +1,239 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lab 1 Flexbox and Grid</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flexbox & CSS Grid Layout - Khmer Fashion</title>
+
   <style>
-    body {
-      font-family: Comic Sans MS, cursive, sans-serif;
-      background: #fffae6;
-      margin: 15px;
+
+
+
+
+    :root{
+      --bg:#111;
+      --ink:#eee;
+      --muted:#bdbdbd;
+      --card:#1e1e1e;
+      --line:#2c2c2c;
+      --link:#8ab4ff;
     }
 
-    h1 {
-      background: yellow;
-      color: red;
-      text-align: center;
-      padding: 5px;
-      border: 3px dashed black;
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{ margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+
+    .container { display:flex; flex-direction:column; min-height:100dvh; }
+
+
+    header{
+      padding:15px;
+      margin-bottom:40px;
+      border-bottom:1px solid var(--line);
+      background:#151515;
+    }
+    .header-bar{
+      display:flex;               
+      align-items:center;
+      justify-content:space-between; 
+      gap:16px;
+      max-width:1100px;
+      margin:0 auto;
+    }
+    .brand{ display:flex; align-items:baseline; gap:12px; }
+    .logo{
+      width:44px; height:44px; border-radius:8px;
+      background:#2a2a2a; color:#fff; font-weight:800;
+      display:flex; align-items:center; justify-content:center;
+    }
+    header nav ul{
+      display:flex;               
+      align-items:baseline;
+      list-style-type:none;
+      gap:12px; padding:0; margin:0;
+    }
+    header nav a{
+      color:var(--ink); text-decoration:none;
+      padding:8px 10px; border:1px solid var(--line); border-radius:8px;
+    }
+    header nav a:hover{ background:#1b1b1b; }
+
+   
+    .wrapper{ max-width:1100px; margin:0 auto; padding:0 16px 48px; width:100%; }
+    .intro{ color:var(--muted); margin:0 0 16px 0; }
+
+  
+    .main{
+      display:grid;            
+      grid-template-columns: 260px 1fr; 
+      gap:16px;
+    }
+    @media (max-width: 780px){
+      .main{ grid-template-columns: 1fr; }
     }
 
-
-    .flex-container {
-      display: flex;
-      background: pink;
-      border: 2px solid black;
-      margin-bottom: 40px;
-      padding: 5px;
+   
+    .sidebar{
+      border:1px solid var(--line); background:var(--card);
+      border-radius:10px; padding:14px;
     }
+    .sidebar h3{ margin:0 0 8px 0; font-size:1rem; }
+    .sidebar p{ margin:0 0 10px 0; color:var(--muted); }
+    .sidebar ul{ margin:0; padding-left:16px; }
+    .sidebar a{ color:var(--link); }
 
-    .flex-item {
-      flex: 1;
-      margin: 3px;
-      background: orange;
-      padding: 15px;
-      text-align: center;
-      font-weight: bold;
-      border: 2px dotted blue;
+   
+    .content{ display:grid; grid-template-rows:auto auto; gap:24px; }
+
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap:12px;
     }
+    .tile{ border:1px solid var(--line); background:var(--card); border-radius:10px; overflow:hidden; }
+    .tile .media{ width:100%; height:200px; overflow:hidden; background:#000; }
+    .tile img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .tile h3{ margin:10px 10px 4px 10px; font-size:1rem; }
+    .tile p{ margin:0 10px 12px 10px; color:var(--muted); }
 
 
-    .grid-container {
-      display: grid;
-      grid-template-columns: 100px 1fr 2fr;
-      gap: 5px;
-      background: lightgreen;
-      border: 3px solid purple;
-      padding: 10px;
-    }
+    .feature{ border:1px solid var(--line); background:var(--card); border-radius:10px; overflow:hidden; }
+    .feature header{ margin:0; padding:12px 14px; border-bottom:1px solid var(--line); background:#191919; }
+    .video-frame{ position:relative; width:100%; padding-bottom:56.25%; background:#000; }
+    .video-frame iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; display:block; }
+    .feature .meta{ display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 14px; color:var(--muted); }
 
-    .grid-item {
-      background: cyan;
-      border: 1px solid black;
-      padding: 20px;
-      text-align: center;
-    }
+  
+    footer{ margin-top:auto; border-top:1px solid var(--line); padding:16px; color:var(--muted); background:#151515; }
+    footer .foot-wrap{ max-width:1100px; margin:0 auto; }
   </style>
 </head>
 <body>
+  <div class="container">
+  
 
-  <h1>Lab 1: Flexbox and Grid Layout</h1>
 
-  <h2>Flexbox Example</h2>
-  <div class="flex-container">
-    <div class="flex-item">Box A</div>
-    <div class="flex-item">Box B</div>
-    <div class="flex-item">Box C</div>
-  </div>
+    <header>
+      <div class="header-bar">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">FX</div>
+          <h1 style="margin:0; font-size:1.05rem;">Flex + Grid Lab 01 — Khmer Fashion</h1>
+        </div>
+        <nav aria-label="Primary">
+          <ul>
+            <li><a href="https://www.jayaproduction.com">Back to Portfolio</a></li>
+            <li><a href="#" aria-disabled="true">About</a></li>
+            <li><a href="#" aria-disabled="true">Contact</a></li>
+          </ul>
+        </nav>
+        <button style="display:none"></button>
+      </div>
+    </header>
 
-  <h2>Grid Example</h2>
-  <div class="grid-container">
-    <div class="grid-item">One</div>
-    <div class="grid-item">Two</div>
-    <div class="grid-item">Three</div>
-    <div class="grid-item">Four</div>
-    <div class="grid-item">Five</div>
-    <div class="grid-item">Six</div>
-  </div>
+    <div class="wrapper">
+      <p class="intro"><strong>Bring the past into a new look for Fall 2025.</strong> All images & video are from 2010 (no AI back then).</p>
+
+
+      <section class="main">
+    
+
+        
+        <aside class="sidebar">
+          <h3>Project Notes</h3>
+          <p>Old-school layout: header = Flexbox, main = Grid. Simple solid colors.</p>
+
+          <h3>References (me + Google)</h3>
+          <ul>
+            <li><a href="https://codehs.com/tutorial/bdefauw/introduction-to-flexbox-and-css-grid" target="_blank" rel="noopener">Intro to Flexbox & Grid — CodeHS</a></li>
+            <li><a href="https://wpengine.com/resources/combine-flexbox-and-css-grids-for-layouts-how-to/" target="_blank" rel="noopener">Combine Flexbox & Grid — WP Engine</a></li>
+            <li><a href="https://www.htmlwasher.com/" target="_blank" rel="noopener">HTML Washer (cleanup)</a></li>
+          </ul>
+        </aside>
+
+    
+        <div class="content">
+                <div class="grid" aria-label="Khmer Fashion Gallery">
+            <article class="tile">
+              <div class="media">
+                <img src="https://live.staticflickr.com/1324/5146949605_2a2ce8ae4a_n.jpg" alt="Khmer fashion look 1">
+              </div>
+              <h3>Look 1</h3>
+              <p>Throwback still, 2010.</p>
+            </article>
+
+            <article class="tile">
+              <div class="media">
+                <img src="https://live.staticflickr.com/4073/4884136871_78529e5042_w.jpg" alt="Khmer fashion look 2">
+              </div>
+              <h3>Look 2</h3>
+              <p>Performance silhouette.</p>
+            </article>
+
+            <article class="tile">
+              <div class="media">
+                <img src="https://live.staticflickr.com/4086/5009891763_1a2cdbf39b_n.jpg" alt="Khmer fashion look 3">
+              </div>
+              <h3>Look 3</h3>
+              <p>Runway fusion.</p>
+            </article>
+
+            <article class="tile">
+              <div class="media">
+                <img src="https://live.staticflickr.com/4133/5071408506_b466bf06ab_n.jpg" alt="Khmer fashion look 4">
+              </div>
+              <h3>Look 4</h3>
+              <p>Street style remix.</p>
+            </article>
+
+            <article class="tile">
+              <div class="media">
+                <img src="https://live.staticflickr.com/1400/5146949665_8556f454a7_n.jpg" alt="Khmer fashion look 5">
+              </div>
+              <h3>Look 5</h3>
+              <p>Silk details.</p>
+            </article>
+
+            <article class="tile">
+              <div class="media">
+                <img src="https://live.staticflickr.com/1398/5146949633_8d476154a0_n.jpg" alt="Khmer fashion look 6">
+              </div>
+              <h3>Look 6</h3>
+              <p>Heritage patterns.</p>
+            </article>
+          </div>
+
+         
+          <section class="feature" aria-label="Fashion Video">
+            <header><h3 style="margin:0; font-size:1rem;">Fashion Show Throwback (2010)</h3></header>
+            <div class="video-frame">
+              <iframe
+                src="https://www.youtube.com/embed/nK2P-DYwYsc?start=1&rel=0"
+                title="Khmer Fashion Show 2010"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="meta">
+              <span>Recorded in 2010</span>
+              <span>Old school vibes</span>
+            </div>
+          </section>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <div class="foot-wrap">
+        <h3 style="margin:0 0 6px 0; font-size:1rem;">Khmer Fashion</h3>
+        <p style="margin:0; color:var(--muted);">&copy; 2025. All rights reserved.</p>
+      </div>
+    </footer>
+  
+</div>
+
+
+
 
 </body>
 </html>
